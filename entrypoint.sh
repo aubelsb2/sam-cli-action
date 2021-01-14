@@ -85,8 +85,13 @@ function gotoDirectory(){
 	cd $INPUT_DIRECTORY
 }
 
+function setupEnv() {
+	ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+}
+
 function main(){
 	parseInputs
+	setupEnv
 	installAwsSam
 	gotoDirectory
 	runSam
