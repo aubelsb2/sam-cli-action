@@ -86,6 +86,7 @@ function gotoDirectory(){
 }
 
 function setupEnv() {
+  mkdir -p ~/.ssh
 	ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
 }
 
