@@ -30,7 +30,10 @@ function installAwsSam(){
 }
 
 function runSam(){
-	if [ "x${INPUT_GITHUB_PACKAGE_REGISTRY_TOKEN}" != "x" ]; then
+	if [ -f "${GITHUB_WORKSPACE}/.npmrc" ]; then
+	    echo "Copying in workspace .npmrc file ignoring package registry token input"
+		cp -v "${GITHUB_WORKSPACE}/.npmrc" ~/.npmrc
+	elif [ "x${INPUT_GITHUB_PACKAGE_REGISTRY_TOKEN}" != "x" ]; then
 	    echo "Creating .npmrc with GITHUB_PACKAGE_REGISTRY_TOKEN"
 		echo "//npm.pkg.github.com/:_authToken=${INPUT_GITHUB_PACKAGE_REGISTRY_TOKEN}" > ~/.npmrc
 	fi
